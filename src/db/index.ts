@@ -9,7 +9,8 @@ const DataBaseConnection = new DataSource({
   password: Deno.env.get("DB_PASSWORD"),
   database: Deno.env.get("DB_NAME"),
   entities: ["./src/entities/**/*.ts"],
-  
+  migrations: ["./migrations/*.ts"],
+
   synchronize: false,
   logging: false,
 });

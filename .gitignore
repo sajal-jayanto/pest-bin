@@ -22,6 +22,7 @@ dist/
 build/
 out/
 bin/
+scripts/data
 
 # Node.js fallback (if using npm specifiers or hybrid setups)
 node_modules/
