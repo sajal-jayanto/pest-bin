@@ -1,9 +1,4 @@
 {
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "useDefineForClassFields": false
-  },
   "tasks": {
     "dev": "deno run --env-file=.env --allow-env --allow-net --allow-read --allow-sys --watch src/server.ts",
     "build": "deno compile --allow-env --allow-net --allow-read --allow-sys --env-file=.env -o server src/server.ts",
@@ -24,7 +19,6 @@
     "pino": "npm:pino@^10.3.1",
     "pino-http": "npm:pino-http@^11.0.0",
     "pino-pretty": "npm:pino-pretty@^13.1.3",
-    "reflect-metadata": "npm:reflect-metadata@^0.2.2",
     "typeorm": "npm:typeorm@^1.1.1",
     "zod": "npm:zod@^4.5.4"
   }

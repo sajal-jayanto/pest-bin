@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { DataSource, EntityTarget, ObjectLiteral, Repository } from "typeorm";
 import { logger } from "../utils/logger.ts";
 
