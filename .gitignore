@@ -1,0 +1,30 @@
+# Deno lockfile and local cache
+.deno/
+deno.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Output and build directories (if compiling or bundling)
+dist/
+build/
+out/
+bin/
+
+# Node.js fallback (if using npm specifiers or hybrid setups)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
