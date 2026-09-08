@@ -6,6 +6,8 @@
   },
   "tasks": {
     "dev": "deno run --env-file=.env --allow-env --allow-net --allow-read --allow-sys --watch src/server.ts",
+    "build": "deno compile --allow-env --allow-net --allow-read --allow-sys --env-file=.env -o server src/server.ts",
+    "start": "./server",
     "migration:create": "deno run -A --env-file=.env scripts/migration.ts create",
     "migration:run": "deno run -A --env-file=.env scripts/migration.ts run",
     "migration:revert": "deno run -A --env-file=.env scripts/migration.ts revert",
