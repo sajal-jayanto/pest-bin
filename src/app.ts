@@ -24,7 +24,7 @@ const createApp = () => {
     });
   });
 
-  app.use("pestben", pestBenRouter);
+  app.use("/pestben", pestBenRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);

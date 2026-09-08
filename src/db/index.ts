@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
+import { DataSource, EntityTarget, ObjectLiteral, Repository } from "typeorm";
+import { logger } from "../utils/logger.ts";
 
 const DataBaseConnection = new DataSource({
   type: "postgres",
@@ -15,4 +16,34 @@ const DataBaseConnection = new DataSource({
   logging: false,
 });
 
-export { DataBaseConnection };
+let dbPromise: Promise<DataSource> | null = null;
+
+const getDataSource = (): Promise<DataSource> => {
+  if (!dbPromise) {
+    try {
+      dbPromise = DataBaseConnection
+        .initialize()
+        .catch((err) => { 
+          dbPromise = null; 
+          throw err;
+        });
+      
+      logger.info("✅ Connected to database successfully.");
+    
+    } catch (error) {
+      console.error("❌ Database connection failed.");
+      console.error(error);
+
+      Deno.exit(1);
+    }
+  }
+  return dbPromise;
+}
+
+const getRepository = async <T extends ObjectLiteral>
+  ( entity: EntityTarget<T> ) : Promise<Repository<T>> => {
+  const ds = await getDataSource();
+  return ds.getRepository(entity);
+}
+
+export { DataBaseConnection , getDataSource, getRepository };
