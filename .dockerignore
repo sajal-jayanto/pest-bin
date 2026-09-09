@@ -29,3 +29,9 @@ build/
 .DS_Store
 coverage/
 *.log
+
+# tests
+*.test.ts
+src/**/*.test.ts
+test/
+.env.test

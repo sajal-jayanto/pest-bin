@@ -8,7 +8,7 @@ import { StatusCodes } from "http-status-codes";
 import { pestBenRouter } from "./routes/pestben.router.ts";
 
 const app = express();
-const startTime = Date.now();
+
 
 const createApp = () => {
   app.use(cors());
@@ -16,6 +16,7 @@ const createApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(requestLogger);
+  const startTime = Date.now();
 
   app.get("/health", (_req: Request, res: Response) => {
     const uptimeSeconds = Math.trunc((Date.now() - startTime) / 1000);

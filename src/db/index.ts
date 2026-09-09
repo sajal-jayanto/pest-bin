@@ -40,4 +40,23 @@ const getRepository = async <T extends ObjectLiteral>
   return ds.getRepository(entity);
 }
 
-export { connectDatabase, DataBaseConnection, getDataSource, getRepository };
+const setDataSource = (ds: DataSource): void => {
+  dbPromise = Promise.resolve(ds);
+};
+
+const closeDatabase = async (): Promise<void> => {
+  if (dbPromise) {
+    const ds = await dbPromise;
+    if (ds.isInitialized) await ds.destroy();
+    dbPromise = null;
+  }
+};
+
+export { 
+  connectDatabase, 
+  DataBaseConnection, 
+  getDataSource, 
+  getRepository , 
+  setDataSource, 
+  closeDatabase
+};
