@@ -1,0 +1,31 @@
+# local service data — never build context material
+scripts/data/
+data/
+*.pid
+
+# vcs + tooling
+.git/
+.github/
+.vscode/
+.idea/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# node/deno leftovers
+node_modules/
+vendor/
+
+# build output
+server
+dist/
+build/
+
+# docs & noise
+*.md
+!README.md
+.DS_Store
+coverage/
+*.log

@@ -1,6 +1,9 @@
 import { DataSource, EntityTarget, ObjectLiteral, Repository } from "typeorm";
 import { logger } from "../utils/logger.ts";
 
+let dbPromise: Promise<DataSource> | null = null;
+const connectDatabase = (): Promise<DataSource> => getDataSource();
+
 const DataBaseConnection = new DataSource({
   type: "postgres",
   host: Deno.env.get("DB_HOST"),
@@ -15,26 +18,18 @@ const DataBaseConnection = new DataSource({
   logging: false,
 });
 
-let dbPromise: Promise<DataSource> | null = null;
-
 const getDataSource = (): Promise<DataSource> => {
   if (!dbPromise) {
-    try {
-      dbPromise = DataBaseConnection
-        .initialize()
-        .catch((err) => { 
-          dbPromise = null; 
-          throw err;
-        });
-      
-      logger.info("✅ Connected to database successfully.");
-    
-    } catch (error) {
-      console.error("❌ Database connection failed.");
-      console.error(error);
-
-      Deno.exit(1);
-    }
+    dbPromise = DataBaseConnection
+      .initialize()
+      .then((ds) => {
+        logger.info("✅ Connected to database successfully.");
+        return ds;
+      })
+      .catch((err) => {
+        dbPromise = null;
+        throw new Error("❌ Database connection failed.", { cause: err });
+      });
   }
   return dbPromise;
 }
@@ -45,4 +40,4 @@ const getRepository = async <T extends ObjectLiteral>
   return ds.getRepository(entity);
 }
 
-export { DataBaseConnection , getDataSource, getRepository };
+export { connectDatabase, DataBaseConnection, getDataSource, getRepository };

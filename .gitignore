@@ -1,6 +1,5 @@
 # Deno lockfile and local cache
 .deno/
-deno.lock
 
 # Environment variables
 .env

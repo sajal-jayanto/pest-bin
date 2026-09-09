@@ -1,7 +1,7 @@
 import pino from "pino";
 
-
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const isProduction = Deno.env.get("NODE_ENV") === "development"
 const transportOption = {
   target: "pino-pretty",
   options: {
@@ -13,8 +13,8 @@ const transportOption = {
 };
 
 const logger = pino({
-  level: Deno.env.get("NODE_ENV") === "development" ? "debug" : "info",
-  transport: Deno.env.get("NODE_ENV") === "development" ? transportOption : undefined,
+  level: !isProduction ? "debug" : "info",
+  ...(!isProduction && { transport: transportOption })
 });
 
 const randomString = (length = 16) => {

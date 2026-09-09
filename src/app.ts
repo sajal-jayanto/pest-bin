@@ -8,6 +8,7 @@ import { StatusCodes } from "http-status-codes";
 import { pestBenRouter } from "./routes/pestben.router.ts";
 
 const app = express();
+const startTime = Date.now();
 
 const createApp = () => {
   app.use(cors());
@@ -17,10 +18,11 @@ const createApp = () => {
   app.use(requestLogger);
 
   app.get("/health", (_req: Request, res: Response) => {
+    const uptimeSeconds = Math.trunc((Date.now() - startTime) / 1000);
     res.status(StatusCodes.OK).json({ 
       status : "ok",
       time: new Date().toISOString(),
-      uptime: `${Math.trunc(process.uptime())}s`
+      uptime: `${uptimeSeconds}s`
     });
   });
 

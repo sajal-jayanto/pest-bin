@@ -11,9 +11,6 @@ import lodash from "lodash";
 
 export const pestBenRouter = Router();
 
-const contentRepo = await getRepository(Content);
-const DB = await getDataSource();
-
 pestBenRouter.get("/get-slug", (_req: Request, res: Response) => {
   const slug = randomString();
   if(lodash.isEmpty(slug)) {
@@ -29,6 +26,7 @@ pestBenRouter.get(
   async (req: Request , res: Response) => {
 
     const { identifier } = req.params;
+    const contentRepo = await getRepository(Content);
     const content = await contentRepo.findOneBy({ identifier });
 
     if(!content) {
@@ -45,6 +43,8 @@ pestBenRouter.post(
   async (req: Request, res: Response) => {
 
     const { identifier , bio } = req.body;
+    const contentRepo = await getRepository(Content);
+    const DB = await getDataSource();
     const isPresent = await contentRepo.findOneBy({ identifier });
     
     if(isPresent){

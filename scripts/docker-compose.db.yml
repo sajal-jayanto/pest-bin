@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
-  postgres:
+  postgres_db:
     image: postgres:18-alpine
-    container_name: postgres_db
+    container_name: postgres_database
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -12,3 +10,10 @@ services:
       - "5432:5432"
     volumes:
       - ./data/postgres:/var/lib/postgresql
+    networks:
+      - pestben-network
+
+networks:
+  pestben-network:
+    name: pestben-network
+    driver: bridge

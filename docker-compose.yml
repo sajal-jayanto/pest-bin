@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pestben-app:latest
+    env_file:
+      - .env
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - pestben-network
+    restart: unless-stopped
+
+networks:
+  pestben-network:
+    external: true
