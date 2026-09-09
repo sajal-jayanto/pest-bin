@@ -4,7 +4,7 @@ import { randomString } from "../utils/logger.ts";
 import { HttpError } from "../middlewares/error.middleware.ts";
 import { validate } from "../middlewares/validate.middleware.ts";
 import { pestbenFetchSchema, pestbenSaveSchema } from "../schemas/pestBen.schema.ts";
-import { Content } from "../entities/content.entitiy.ts";
+import { Content } from "../entities/content.entity.ts";
 import { getDataSource, getRepository } from "../db/index.ts";
 import { EntityManager } from "typeorm";
 import lodash from "lodash";

@@ -1,6 +1,6 @@
 import { DataType, newDb } from "pg-mem";
 import type { DataSource } from "typeorm";
-import { Content } from "../entities/content.entitiy.ts";
+import { Content } from "../entities/content.entity.ts";
 import { setDataSource } from "../db/index.ts";
 
 const ENTITIES = [Content];
